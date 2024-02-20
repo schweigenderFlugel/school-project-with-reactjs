@@ -3,15 +3,15 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { SignUpModal } from './Modals/SignUpModal'
 import { useModalButton } from '../Hooks/useModalButton'
 import { INPUTS_SIGNUP } from './const/inputs.auth'
+import axios from '../Services/axios';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('')
   const { setOpenSignUpModal, openSignUpModal } = useModalButton();
-
-  const SIGN_UP_URL = 'http://localhost:3000/auth/sign-up'
 
   const errRef = useRef()
 
@@ -19,22 +19,23 @@ export const SignUp = () => {
     setError(null)
   }, [email, password, confirmPassword])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true)
     try {
-      fetch(SIGN_UP_URL, {
+      await axios({
+        url: '/sign-up',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, confirmPassword })
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin': '*'
+        },
+        withCredentials: true,
+        data: JSON.stringify({ email, password, confirmPassword })
       })
     } catch (error) {
-      if (error?.response) {
-        setError(<p>No pudo conectarse al servidor</p>)
-      }
-      if (error?.response.status === 400) {
-        setError(<p>Debe ingresar su email y contraseña</p>)
-      }
-      errRef.current.focus()
+
     }
   }
 

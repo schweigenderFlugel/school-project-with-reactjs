@@ -46,6 +46,7 @@ export const SignIn = () => {
       const accessToken = response?.data
       setSignIn(accessToken);
       setIsLoading(false);
+      setOpenSignInModal(false);
       navigate(from, { replace: true });
     } catch (error) {
       if (!error?.response) {
