@@ -6,7 +6,9 @@ import ProtectedRoutes from './Components/ProtectedRoutes'
 import { Home } from './Pages/Home'
 import { SignIn } from './Components/SignIn'
 import { SignUp } from './Components/SignUp'
+import { Validation } from './Components/Validation'
 import { Profile } from './Pages/Profile'
+import { ErrorMessagesTag } from './Components/ErrorMessages'
 import { NotFoundPage } from './Pages/NotFoundPage'
 import './App.css'
 
@@ -14,9 +16,11 @@ export const App = () => {
   return (
     <AppProvider>
       <BrowserRouter>
+        <ErrorMessagesTag/>
         <Navbar />
-        <SignIn/>
-        <SignUp/>
+        <SignIn />
+        <SignUp />
+        <Validation />
         <Routes>
           <Route index path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />

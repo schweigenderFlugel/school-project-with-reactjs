@@ -7,6 +7,7 @@ export const AppProvider = ({ children }) => {
   const [ discordAuth, setDiscordAuth ] = useState(false)
   const [ openSignInModal, setOpenSignInModal ] = useState(false);
   const [ openSignUpModal, setOpenSignUpModal ] = useState(false);
+  const [ openValidationModal, setOpenValidationModal ] = useState(false);
   const [ profileMenu, setProfileMenu ] = useState(false);
   const [ error, setError ] = useState(null);
 
@@ -21,6 +22,8 @@ export const AppProvider = ({ children }) => {
         setOpenSignInModal,
         openSignUpModal, 
         setOpenSignUpModal,
+        openValidationModal, 
+        setOpenValidationModal,
         profileMenu, 
         setProfileMenu,
         error,

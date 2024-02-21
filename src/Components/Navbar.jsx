@@ -3,7 +3,7 @@ import { IoMenu } from "react-icons/io5";
 import { FaCircleUser } from "react-icons/fa6";
 import { AppContext } from "../Context/AppProvider";
 import { useSignIn } from '../Hooks/useLogin'
-import { useModalButton } from '../Hooks/useModalButton'
+import { useModals } from '../Hooks/useModals'
 import { SignInButton, SignUpButton } from './Buttons/SignButtons';
 import { ProfileMenu } from "../Components/ProfileMenu";
 
@@ -11,7 +11,7 @@ import { ProfileMenu } from "../Components/ProfileMenu";
 export const Navbar = () => {
   const { signIn } = useSignIn();
   const { profileMenu, setProfileMenu } = useContext(AppContext);
-  const { openSignInModal, setOpenSignInModal, openSignUpModal, setOpenSignUpModal } = useModalButton();
+  const { openSignInModal, setOpenSignInModal, openSignUpModal, setOpenSignUpModal } = useModals();
 
   return (
     <nav className='flex bg-white z-10 w-full justify-between'>

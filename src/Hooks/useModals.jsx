@@ -1,12 +1,14 @@
 import { useContext } from "react"
 import { AppContext } from "../Context/AppProvider"
 
-export const useModalButton = () => {
+export const useModals = () => {
     const { 
         openSignInModal, 
         setOpenSignInModal,
         openSignUpModal, 
         setOpenSignUpModal,
+        openValidationModal,
+        setOpenValidationModal,
         error,
         setError,
     } = useContext(AppContext);
@@ -21,5 +23,14 @@ export const useModalButton = () => {
 
     setErrorNull();
 
-    return { openSignInModal, setOpenSignInModal, openSignUpModal, setOpenSignUpModal, error, setError }
+    return { 
+      openSignInModal,
+      setOpenSignInModal,
+      openSignUpModal,
+      setOpenSignUpModal,
+      openValidationModal,
+      setOpenValidationModal, 
+      error, 
+      setError 
+    }
 }

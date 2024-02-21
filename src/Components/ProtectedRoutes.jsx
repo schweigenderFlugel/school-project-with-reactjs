@@ -1,11 +1,11 @@
 import { Outlet, Navigate, useLocation } from 'react-router-dom'
 import { useSignIn } from '../Hooks/useLogin'
-import { useModalButton } from '../Hooks/useModalButton'
+import { useModals } from '../Hooks/useModals'
 
 const ProtectedRoutes = () => {
   const { signIn } = useSignIn()
   const location = useLocation()
-  const { signInOpenModal, setOpenSignInModal } = useModalButton();
+  const { signInOpenModal, setOpenSignInModal } = useModals();
 
   const Modal = () => {
     setOpenSignInModal(!signInOpenModal)
