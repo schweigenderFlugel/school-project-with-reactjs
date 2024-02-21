@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 import { Modal } from './Modal';
@@ -8,9 +8,9 @@ import { INPUTS_SIGNUP } from './const/inputs.auth';
 import axios from '../Services/axios';
 
 export const SignUp = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { setOpenSignUpModal, openSignUpModal, setOpenValidationModal, setError } = useModals();
 
@@ -25,10 +25,7 @@ export const SignUp = () => {
         signal: abortController.signal,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': true,
-          'Access-Control-Allow-Origin': '*'
         },
-        withCredentials: true,
         data: JSON.stringify({ email, password, confirmPassword })
       })
       setIsLoading(false);
@@ -83,16 +80,19 @@ export const SignUp = () => {
           <div>
             <input 
             {...INPUTS_SIGNUP.email}
+            required
             onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <input
             {...INPUTS_SIGNUP.password}
+            required
             onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div>
             <input 
             {...INPUTS_SIGNUP.confirmPassword}
+            required
             onChange={(e) => setConfirmPassword(e.target.value)} />
           </div>
           {isLoading

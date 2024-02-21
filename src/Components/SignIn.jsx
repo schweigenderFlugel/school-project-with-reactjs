@@ -44,6 +44,7 @@ export const SignIn = () => {
         data: JSON.stringify({ email, password })
       })
       const accessToken = response?.data
+      console.log(accessToken)
       setSignIn(accessToken);
       setIsLoading(false);
       setOpenSignInModal(false);

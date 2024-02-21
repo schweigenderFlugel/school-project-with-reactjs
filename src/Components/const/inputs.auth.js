@@ -30,7 +30,7 @@ export const INPUTS_SIGNUP = {
     placeholder: 'Contraseña',
     min: '8',
     max: '20',
-    className: 'out-of-range:bg-red-500 rounded-md px-2 py-1 mb-3'
+    className: 'out-of-range:bg-red-500 rounded-md px-2 py-1 mb-3',
   },
   confirmPassword: {
     id: 'confirm_password',
@@ -39,6 +39,6 @@ export const INPUTS_SIGNUP = {
     placeholder: 'Confirmar contraseña',
     min: '8',
     max: '20',
-    className: 'out-of-range:bg-red-500 rounded-md px-2 py-1 mb-3'
+    className: 'out-of-range:bg-red-500 rounded-md px-2 py-1 mb-3',
   }
 }

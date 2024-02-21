@@ -4,25 +4,26 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from "../Services/axios";
 import { Modal } from "./Modal";
 import { useModals } from "../Hooks/useModals";
+import { ErrorMessages } from "./ErrorMessages";
 
 export const Validation = () => {
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ validationCode, setValidationCode ] = useState('');
-  const { openValidationModal, setOpenValidationModal } = useModals();
+  const [ code, setCode ] = useState('');
+  const { openValidationModal, setOpenValidationModal, setError } = useModals();
 
   const validateRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
       await axios({
-        url: '/validate',
-        method: 'PUT',
+        url: '/activation',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        data: JSON.stringify({ validationCode })
+        data: JSON.stringify({ code })
       })
-      setOpenValidationModal(true)
+      setOpenValidationModal(false)
     } catch (error) {
       if (!error?.response) {
         setIsLoading(false);
@@ -32,6 +33,12 @@ export const Validation = () => {
         setIsLoading(false);
         setError(<ErrorMessages>El código es incorrecto</ErrorMessages>);
         setOpenSignInModal(false);
+      } else {
+        setIsLoading(false);
+        setError(<ErrorMessages>Error desconocido</ErrorMessages>);
+        setTimeout(() => {
+          setError(null);
+        }, 3000)
       }
     }
   }
@@ -44,7 +51,7 @@ export const Validation = () => {
         <div>
           <form onSubmit={validateRegister}>
             <div>
-              <input className='rounded-md px-2 py-1 mb-6' onChange={(e) => setValidationCode(e.target.value)}/>
+              <input className='rounded-md px-2 py-1 mb-6' onChange={(e) => setCode(e.target.value)}/>
             </div>
               {isLoading
                 ? (
