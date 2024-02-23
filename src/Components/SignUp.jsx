@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 import { Modal } from './Modal';
 import { ErrorMessages } from './ErrorMessages';
-import { useModals } from '../Hooks/useModals';
 import { INPUTS_SIGNUP } from './const/inputs.auth';
+import { SignButton } from './Buttons/SignButton';
 import axios from '../Services/axios';
+import { AppContext } from '../Context/AppProvider';
 
 export const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { setOpenSignUpModal, openSignUpModal, setOpenValidationModal, setError } = useModals();
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ confirmPassword, setConfirmPassword ] = useState('');
+  const [ isLoading, setIsLoading ] = useState(false);
+  const { openSignUpModal, setOpenSignUpModal, setOpenValidationModal } = useContext(AppContext);
 
   const handleSubmit = async (e) => {
     const abortController = new AbortController();
@@ -35,34 +36,29 @@ export const SignUp = () => {
       if (!error?.response) {
         setIsLoading(false);
         setError(<ErrorMessages>No pudo conectarse al servidor</ErrorMessages>);
-        setOpenSignUpModal(false);
         setTimeout(() => {
           setError(null);
         }, 3000)
       } else if (error?.response?.status === 401) {
         setIsLoading(false);
         setError(<ErrorMessages>Datos Incorrectos</ErrorMessages>);
-        setOpenSignUpModal(false);
         setTimeout(() => {
           setError(null);
         }, 3000)
       } else if (error?.response?.status === 404) {
         setIsLoading(false);
-        setOpenSignUpModal(false);
         setError(<ErrorMessages>Datos Incorrectos</ErrorMessages>);
         setTimeout(() => {
           setError(null);
         }, 3000)
       } else if (error?.response?.status === 409) {
         setIsLoading(false);
-        setOpenSignUpModal(false);
         setError(<ErrorMessages>El correo ingresado ya está registrado</ErrorMessages>);
         setTimeout(() => {
           setError(null);
         }, 3000)
       } else {
         setIsLoading(false);
-        setOpenSignUpModal(false);
         setError(<ErrorMessages>Error desconocido</ErrorMessages>);
         setTimeout(() => {
           setError(null);
@@ -72,7 +68,9 @@ export const SignUp = () => {
   }
 
   return (
-    <Modal open={openSignUpModal}>
+    <>
+      <SignButton setOpen={() => setOpenSignUpModal(!openSignUpModal)}>Sign Up</SignButton>
+      <Modal open={openSignUpModal}>
       <main className='grid place-content-center text-center bg-white rounded-3xl px-12 py-6'>
       <IoCloseCircleOutline onClick={() => setOpenSignUpModal(!openSignUpModal)} className='text-[30px] hover:text-red-600 relative cursor-pointer'></IoCloseCircleOutline>
       <header className='font-bold mb-6 mt-4 text-[20px]'>Ingrese sus datos</header>
@@ -107,5 +105,6 @@ export const SignUp = () => {
         </form>
       </main>
     </Modal>
+    </>
   )
 }

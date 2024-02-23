@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSignIn } from '../Hooks/useLogin'
 import { useAxiosPrivate } from '../Hooks/useInterceptor'
+import { AppContext } from '../Context/AppProvider'
 
 export const Profile = () => {
-  const { signIn } = useSignIn()
+  const { signIn } = useContext(AppContext)
   const [profile, setProfile] = useState({})
   const [controller, setController] = useState(null)
   const [loading, setLoading] = useState(true)

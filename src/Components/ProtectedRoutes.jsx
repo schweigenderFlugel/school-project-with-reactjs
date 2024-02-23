@@ -1,9 +1,10 @@
+import { useContext } from 'react'
 import { Outlet, Navigate, useLocation } from 'react-router-dom'
-import { useSignIn } from '../Hooks/useLogin'
 import { useModals } from '../Hooks/useModals'
+import { AppContext } from '../Context/AppProvider'
 
 const ProtectedRoutes = () => {
-  const { signIn } = useSignIn()
+  const { signIn } = useContext(AppContext)
   const location = useLocation()
   const { signInOpenModal, setOpenSignInModal } = useModals();
 

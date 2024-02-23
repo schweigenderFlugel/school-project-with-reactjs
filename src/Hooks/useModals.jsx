@@ -3,8 +3,6 @@ import { AppContext } from "../Context/AppProvider"
 
 export const useModals = () => {
     const { 
-        openSignInModal, 
-        setOpenSignInModal,
         openSignUpModal, 
         setOpenSignUpModal,
         openValidationModal,
@@ -15,17 +13,13 @@ export const useModals = () => {
 
     const setErrorNull = () => {
       if (error !== null) {
-        if(openSignInModal || openSignUpModal) {
-          setError(null);
-        }
+        setError(null);
       }
     }
 
     setErrorNull();
 
     return { 
-      openSignInModal,
-      setOpenSignInModal,
       openSignUpModal,
       setOpenSignUpModal,
       openValidationModal,

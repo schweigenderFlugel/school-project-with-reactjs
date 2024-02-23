@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import useRefreshToken from '../Hooks/useRefreshToken'
-import { useSignIn } from '../Hooks/useLogin'
+import { AppContext } from '../Context/AppProvider'
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState()
   const refresh = useRefreshToken()
-  const { signIn } = useSignIn()
+  const { signIn } = useContext(AppContext)
 
   useEffect(() => {
     const verifyRefreshToken = async () => {

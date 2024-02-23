@@ -4,22 +4,18 @@ import { Navbar } from './Components/Navbar'
 import PersistLogin from './Components/PersistLogin'
 import ProtectedRoutes from './Components/ProtectedRoutes'
 import { Home } from './Pages/Home'
-import { SignIn } from './Components/SignIn'
-import { SignUp } from './Components/SignUp'
 import { Validation } from './Components/Validation'
 import { Profile } from './Pages/Profile'
-import { ErrorMessagesTag } from './Components/ErrorMessages'
 import { NotFoundPage } from './Pages/NotFoundPage'
 import './App.css'
+import { Tags } from './Components/Tags'
 
 export const App = () => {
   return (
     <AppProvider>
       <BrowserRouter>
-        <ErrorMessagesTag/>
+        <Tags />
         <Navbar />
-        <SignIn />
-        <SignUp />
         <Validation />
         <Routes>
           <Route index path='/' element={<Home />} />

@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { useSignIn } from './useLogin'
+import { useEffect, useContext } from 'react'
+import { AppContext } from '../Context/AppProvider'
 import useRefreshToken from './useRefreshToken'
 import { axiosPrivate } from '../Services/axios'
 
@@ -17,7 +17,7 @@ import { axiosPrivate } from '../Services/axios'
 
 export const useAxiosPrivate = () => {
   const refresh = useRefreshToken()
-  const { signIn } = useSignIn()
+  const { signIn } = useContext(AppContext);
 
   useEffect(() => { 
     const requestIntercept = axiosPrivate.interceptors.request.use(

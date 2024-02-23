@@ -1,8 +1,9 @@
+import { useContext } from 'react'
 import axios from '../Services/axios'
-import { useSignIn } from './useLogin'
+import { AppContext } from '../Context/AppProvider'
 
 const useSignOut = () => {
-  const { setSignIn } = useSignIn()
+  const { setSignIn } = useContext(AppContext);
 
   const signOut = async () => {
     setSignIn({})
